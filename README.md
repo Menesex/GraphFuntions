@@ -1,6 +1,5 @@
 # 📈 GraphFuntions | Graficador Matemático  
-
-<img src="preview_resized.png" width="600" alt="GraphFuntions Preview">  
+<img src="preview_resized.png" width="450" alt="GraphFuntions Preview">  
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Open in GitHub Pages](https://img.shields.io/badge/live%20demo-GitHub%20Pages-brightgreen)](https://menesex.github.io/GraphFuntions/)
@@ -20,6 +19,14 @@ Herramienta web para graficar funciones polinómicas y calcular derivadas, punto
    cd GraphFuntions
    open index.html
    ```
+## PostData
+👨🏻‍🎓​ (Proyecto universitario, en 2024-2)
+
+👨🏻‍💻📚Para combinar programación con calculo diferencia, y mejorar mis habilidades en el uso de git/github
+ 
+🥶​ [Tiene muchos errores]
+
+😋El objetivo fue practicar , no hacer un programa perfecto 
 
 ## 🛠️ Tecnologías  
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
