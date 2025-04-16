@@ -1,6 +1,7 @@
 # 📈 GraphFuntions | Graficador Matemático  
-<img src="preview_resized.png" width="450" alt="GraphFuntions Preview">  
-
+<div align="center">
+  <img src="preview_resized.png" width="600" alt="GraphFuntions Preview">
+</div>
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Open in GitHub Pages](https://img.shields.io/badge/live%20demo-GitHub%20Pages-brightgreen)](https://menesex.github.io/GraphFuntions/)
 
