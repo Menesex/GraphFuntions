@@ -1,7 +1,6 @@
 # 📊 GraphFuntions
 
-![Preview](preview.png) <!-- Añade una imagen de preview -->
-
+<img src="preview_resized.png" width="600" alt="Vista previa de GraphFuntions">
 Una aplicación web para graficar funciones matemáticas y calcular derivadas, puntos críticos y más.  
 **Desarrollado con HTML, CSS y JavaScript**.
 
