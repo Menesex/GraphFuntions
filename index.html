@@ -3,62 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graficador de Polinomios</title>
+    <title>PolyGraphiX</title>
     <link rel="stylesheet" href="styles.css">
     
-        <!--Librerías -->
+        <!-----------------------------------Librerías ------------------------------------------------------------>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.2.0/math.min.js"></script>
         <!-- <script src="https://unpkg.com/algebrite"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/algebrite@1.4.0/dist/algebrite.bundle-for-browser.min.js"></script>
-        <!-- -->
-
-
+        <!--Visualizar -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <!-----------------------------------Librerías ------------------------------------------------------------>
 </head>
 <body>
-    <h1>GraphFuntions</h1>
-
-    <div>
+    <h1>PolyGraphiX</h1>
+    <!-- Contenedor para ingresar la ecucación -->
+    <div id="inputContainer">
         <input type="text" id="equationInput" placeholder="Escribe tu función aquí">
-        <input type="number" id="xMinInput" value="-3000" placeholder="Rango mínimo (x1)">
-        <input type="number" id="xMaxInput" value="3000" placeholder="Rango máximo (x2)">
+        <div id="rangeInputs" >
+            <input type="number" id="xMinInput" class="plotRange" value="-3000" placeholder="Rango mínimo (x1)">
+            <input type="number" class="plotRange" id="xMaxInput" value="3000" placeholder="Rango máximo (x2)">
+        </div>
         <button id = "graphButton"onclick="plotGraph()">Graficar</button>
+    </div>
+
+    <!-- Contenedor para previsualización de la ecuación -->
+    <div id="previewContainer">
+        <h3>Previsualización:</h3>
+        <div id="equationPreview"></div>
     </div>
 
     <!-- Botones para funciones matemáticas -->
     <div class="math-buttons">
-        <button onclick="clearInput()">Clear</button>
+        <button onclick="clearInput();updatePreview();">Clear</button>
         <button onclick="insertFunction('nthRoot(x, índice)')">nthRoot(x, índice)</button>
         <button onclick="insertFunction('sqrt(x)')">sqrt(x)</button>
         <button onclick="insertFunction('pow(x, y)')">pow(x, y)</button>
         <button onclick="insertFunction('^')">^</button>
         <button onclick="insertFunction('*')">*</button>
-
         <button onclick="insertFunction('sin(x)')">sin(x)</button>
         <button onclick="insertFunction('cos(x)')">cos(x)</button>
-        <button onclick ="insertFunction('tan(x)')">tan(x)</button>
-
-        <button onclick="insertFunction('exp(x)')">exp(x)</button>
-        <button onclick="insertFunction('log(x)')">log(x)</button>
-        <button onclick="insertFunction('abs(x)')">abs(x)</button>
+        <button onclick="insertFunction('tan(x)')">tan(x)</button>
+        <!-- <button onclick="insertFunction('exp(x)')">exp(x)</button> -->
+        <!-- <button onclick="insertFunction('log(x)')">log(x)</button> -->
+        <!-- <button onclick="insertFunction('abs(x)')">abs(x)</button> -->
+        <!-- ecuaciones prestablecidas -->
+        <button onclick="insertFunction('2*x')">2*x</button>
+        <button onclick="insertFunction('x^2')">x^2</button>
+        <button onclick="insertFunction('3x+3')">3x+3</button>
+        <button onclick="insertFunction('x^2+2*x+3')">x^2+2*x+3</button>
+        <button onclick="insertFunction('2*x^3')">2*x^3</button>
     </div>
 
     <div id="graphContainer"></div>
     <div id="infoContainer">
-        <h2><strong>Información de la función</strong></h2>
+        <h2><strong>Información de la función </strong> <span id="info_funtion_name"></span> </h2>
         <ul>
-            <p id="derivative1">Primera derivada: </p>
-            <p id="derivative2">Segunda derivada: </p>
+            <p id="derivative1">Primera derivada: <span id="derivative1Math"></span></p>
+            <p id="derivative2">Segunda derivada: <span id="derivative2Math"></span></p>
             <p id="domain">Dominio: </p>
             <p id="maximos">Máximos: </p>
             <p id="minimos">Mínimos: </p>
-            <!-- <p id="asintotas">Asintotas: </p>-->
             <p id="inflexion">Inflexión: </p>
+            <!-- <p id="asintotas">Asintotas: </p> -->
         </ul>
         <h2>Comprobar cálculo de puntos críticos (widget externo)</h2>  
         <script type="text/javascript" id="WolframAlphaScriptc3dca6eecdf620eb762db0179b82f5" src="//www.wolframalpha.com/widget/widget.jsp?id=c3dca6eecdf620eb762db0179b82f5"></script>
-        
     </div>
     <script src="script.js"></script>
+    
+    <a href="ayuda.html" class="boton-link">
+        <button class="boton">Haz clic aquí para ir a las instrucciones</button>
+    </a>
 </body>
 </html>

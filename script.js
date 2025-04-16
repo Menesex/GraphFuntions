@@ -1,5 +1,19 @@
 // Variable global para almacenar la posición del cursor
 let cursorPosition = 0;
+// Función para actualizar la previsualización
+function updatePreview() {
+    const equationInput = document.getElementById("equationInput").value;
+    const previewDiv = document.getElementById("equationPreview");
+
+    // Convertir la ecuación ingresada a formato MathJax
+    previewDiv.innerHTML = `\\(${equationInput}\\)`;
+
+    // Renderizar MathJax
+    MathJax.typesetPromise().catch((err) => console.log("Error al renderizar MathJax:", err));
+}
+
+// Escuchar eventos de entrada en tiempo real
+document.getElementById("equationInput").addEventListener("input", updatePreview);
 
 // Detectar la posición del cursor en el campo de entrada
 document.getElementById('equationInput').addEventListener('click', getCursorPosition);
@@ -9,7 +23,7 @@ function clearInput() {
     input.value = '';  // Borra el contenido del campo de entrada
     input.focus();     // Coloca el foco nuevamente en el campo de entrada
     cursorPosition = 0; // Resetea la posición del cursor
-}
+}3
 
 // Función para obtener y almacenar la posición actual del cursor
 function getCursorPosition() {
@@ -36,6 +50,7 @@ function insertFunction(func) {
     // Enfocar el campo de entrada y colocar el cursor en la nueva posición
     input.focus();
     input.setSelectionRange(cursorPosition, cursorPosition);
+    updatePreview()
 }
 
 // Función para validar la ecuación ingresada (polinomios, racionales, raíces, etc.)
@@ -131,13 +146,14 @@ function validateEquation(equation) {
 
 // Función para GRAFICAR la ecuación ingresada
 function plotGraph() {
+    const equationInput = document.getElementById("equationInput").value;
     const equation = document.getElementById('equationInput').value;
     const xMinInput = document.getElementById('xMinInput').value;
     const xMaxInput = document.getElementById('xMaxInput').value;
 
     const xMin = xMinInput ? parseFloat(xMinInput) : xMinInput;
     const xMax = xMaxInput ? parseFloat(xMaxInput) : xMaxInput;
-    const step = 0.1;       
+    const step = 0.01;       
     const limitY = 1000000;
 
     const errorMessage = validateEquation(equation);
@@ -192,20 +208,20 @@ function plotGraph() {
             x: xValues,
             y: yValues,
             mode: 'lines',
-            line: { color: 'blue', width: 2 }
+            line: { color: 'blue', width: 2.3 }
         };
 
         const layout = {
             title: 'Gráfica de la función: ' + equation,
-            xaxis: { title: 'x', showgrid: true, zeroline: true, range: [xMin, xMax] },
-            yaxis: { title: 'y', range: [-limitY, limitY], showgrid: true, zeroline: true, scaleanchor: 'x', scaleratio: 1 },
+            xaxis: { title: 'x', showgrid: true, zeroline: true, range: [-10, 10] },
+            yaxis: { title: 'y', range: [-10, 10], showgrid: true, zeroline: true, scaleanchor: 'x', scaleratio: 1 },
             width: 600,
             height: 600,
             autosize: false,
             margin: { l: 50, r: 50, t: 50, b: 50 },
             shapes: [
-                { type: 'line', x0: 0, y0: -100000, x1: 0, y1: 100000, line: { color: 'black', width: 2 } },
-                { type: 'line', x0: -100000, y0: 0, x1: 100000, y1: 0, line: { color: 'black', width: 2 } }
+                { type: 'line', x0: 0, y0: -100000, x1: 0, y1: 100000, line: { color: 'black', width: 1.3 } },
+                { type: 'line', x0: -100000, y0: 0, x1: 100000, y1: 0, line: { color: 'black', width: 1.3 } }
             ],
             dragmode: 'pan',
             hovermode: 'closest'
@@ -221,6 +237,8 @@ function plotGraph() {
         // Llamar a showInfo para mostrar información extra sobre la función
         console.log("Llamando a showInfo con la ecuación:", equation);
         showInfo(equation);
+        document.getElementById('info_funtion_name').innerHTML = `\\(${equation}\\)`;
+        MathJax.typeset(); // Forzar la renderización de MathJax
 
     } catch (error) {
         
@@ -230,18 +248,26 @@ function plotGraph() {
 
 function derive(equation) {
     try {
+        // Calculamos las derivadas usando math.js
         const firstDerivative = math.derivative(equation, 'x').toString();
         const secondDerivative = math.derivative(firstDerivative, 'x').toString();
-        return { firstDerivative, secondDerivative };
+
+        // Formateamos para MathJax usando formato TeX
+        const firstDerivativeTeX = `\\frac{d}{dx}(${equation}) = ${firstDerivative}`;
+        const secondDerivativeTeX = `\\frac{d^2}{dx^2}(${equation}) = ${secondDerivative}`;
+
+        return { 
+            firstDerivativeTeX, 
+            secondDerivativeTeX 
+        };
     } catch (error) {
         console.error("Error al calcular derivadas:", error);
         alert("Error al calcular las derivadas.");
     }
 }
 
-//**************************  FUNCIÓN QUE NECESITO ARREGLAR!!!  ******************/
-// Función para encontrar puntos críticos y clasificarlos
 
+// Función para encontrar puntos críticos y clasificarlos
 function findCriticalPoints(equation) {
     try {
         // Derivadas primera y segunda
@@ -304,16 +330,9 @@ function findCriticalPoints(equation) {
         return { maxima: [], minima: [], inflectionPoints: [] };
     }
 }
+//*******************************************/
 
-
-
-
-
-//**************************  FUNCIÓN QUE NECESITO ARREGLAR!!!  ******************/
-
-
-
-// para calcular el dominio = createDomain(),evaluateConditions(),calculateDomain().
+// para calcular el dominio = son 3 = createDomain(),evaluateConditions(),calculateDomain().
 // Generar un dominio de valores para evaluar (de -100 a 100 con incrementos de 1, por ejemplo)
 function createDomain(start = -3000, end = 3000, step = 1) {
     let domain = [];
@@ -368,13 +387,19 @@ function calculateDomain(expression) {
     return intervals.join(" U ");
 }
 
-// Función para mostrar la información en el contenedor HTML
+//=---=-=-=-=-=-=-=-= Función para mostrar la información en el contenedor HTML =-=--=-=-=-=-=-=
 function showInfo(equation) {
     //-------------------------------------------------: (derivadas):---------------------------------------------
     try {
         const derivatives = derive(equation);
-        document.getElementById('derivative1').innerText = `Primera derivada: ${derivatives.firstDerivative}`;
-        document.getElementById('derivative2').innerText = `Segunda derivada: ${derivatives.secondDerivative}`;
+
+        // Usamos notación TeX para MathJax y envolvemos con delimitadores \( \)
+        document.getElementById('derivative1').innerHTML = `Primera derivada: \\(${derivatives.firstDerivativeTeX}\\)`;
+        document.getElementById('derivative2').innerHTML = `Segunda derivada: \\(${derivatives.secondDerivativeTeX}\\)`;
+
+        // Actualizamos MathJax para renderizar las ecuaciones
+        MathJax.typesetPromise().catch((err) => console.log("Error al renderizar MathJax:", err));
+
     } catch (error) {
         document.getElementById('derivative1').innerText = `Primera derivada: No se pudo calcular`;
         document.getElementById('derivative2').innerText = `Segunda derivada: No se pudo calcular`;
@@ -403,8 +428,9 @@ function showInfo(equation) {
         document.getElementById('inflexion').innerText = `Inflexion: (${criticalPoints.inflectionPoints})`;
         
     }catch(error){
-        document.getElementById('criticalPoints').innerText = `Puntos críticos: No se pudo calcular.`;
+        document.getElementById('maximos').innerText = `Puntos críticos: No se pudo calcular.`;
         console.error("Error en showInfo (puntos críticos)", error);
         alert("Error en showInfo (puntos críticos)", error);
     }//--------------------------------------------------Puntos críticos fin----------------------------------------------
 }
+//=---=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=: END :=-=-=-=- =-=--=-=-=-=-=-=

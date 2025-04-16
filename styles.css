@@ -1,3 +1,8 @@
+/* =-=-=-=-=-=-=--=-=-=-=-=-=--=-=-=---=-=-=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=-=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=-=-=--=-=-=*/
+
+/* =-=-=-=-=-=-=--=-=-=-=-=-=--=-=-=---=-=-=-=-=-=-=-= CÓDIGO PARA DAR ESTILOS Y COLORES A UNA DE LAS PÁGINAS =-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=-=-=--=-=-=*/
+
+/* =-=-=-=-=-=-=--=-=-=-=-=-=--=-=-=---=-=-=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=-=-=-=--=-=-=--=-=-=--=-=-=--=-=-=--=-=-=-=-=--=-=-=*/
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -6,8 +11,8 @@ body {
     justify-content: center;
     min-height: 100vh;
     background-color: #2b2b2b;
+    color: #ffffff;
 }
-
 h1 {
     margin-bottom: 20px;
     color: #0073ff;
@@ -19,9 +24,18 @@ input[type="text"] {
     margin-right: 10px;
     font-size: 16px;
 }
+#xMinInput, #xMaxInput {
+    padding: 10px;
+    width: 48%;
+    font-size: 16px;
+    border: 2px solid #0073ff;
+    border-radius: 5px;
+    background-color: #0202028a;
+    color: #ffffff;
+    box-sizing: border-box;
+}
 
-
-#graphButton{
+#graphButton {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
@@ -29,13 +43,80 @@ input[type="text"] {
     color: #ffffff;
     border: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
-
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
 }
 #graphButton:hover {
-    background-color: #07398a59;
+    background-color: #123b7e59;
+    transform: scale(1.2);
 }
 
+#graphButton:active {
+    background-color: #003f8a;
+    transform: scale(0.98);
+}
+
+/* Inputs de rango */
+#rangeInputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 15px;
+    
+}
+
+/* Input de la ecuación */
+#equationInput {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 2px solid #0073ff;
+    border-radius: 5px;
+    background-color: #0202028a;
+    color: #0073ff;
+    box-sizing: border-box;
+}
+#equationInput:hover{
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 2px solid #0073ff;
+    border-radius: 5px;
+    background-color: #0202028a;
+    color: #0073ff;
+    box-sizing: border-box;
+}
+#inputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 20px;
+}
+
+#previewContainer {
+    display: inline-block;
+    width: 300px;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #0073ff;
+    border-radius: 5px;
+    background-color: #191a32;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    overflow: auto;
+    margin: 20px;
+}
+.plotRange{
+    border: 2px solid #0073ff;
+    border-radius: 5px;
+    background-color: #0202028a;
+    color: #0073ff;
+    box-sizing: border-box;
+}
 .math-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -62,9 +143,19 @@ input[type="text"] {
 }
 
 #graphContainer {
-    width: 800px; /* Ancho del gráfico */
-    height: 600px; /* Alto del gráfico */
+    width: 800px; 
+    height: 600px;
     margin: 60px 0px 60px 160px;
+}
+
+/* Contenedor de inputs */
+#inputContainer {
+    background-color: #191a32;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    text-align: center;
 }
 
 #infoContainer {
@@ -101,4 +192,30 @@ li::before{
 
 #puntoscriticos p{
     margin: 18px 120px 0px 0px;
+}
+
+.boton {
+    background-color:#0073ff ;
+    color: white;              
+    border: none;              
+    padding: 15px 32px;        
+    text-decoration: none;     
+    display: inline-block;     
+    font-size: 16px;           
+    margin: 4px 2px;           
+    cursor: pointer;          
+    border-radius: 8px;        
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+
+.boton:hover {
+    
+    background-color:#024496 ;
+    transform: scale(1.1);      
+}
+
+.boton:active {
+    background-color:#023f8a ; 
+    transform: scale(0.95);    
 }
