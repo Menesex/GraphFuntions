@@ -1,4 +1,4 @@
-# 📈 GraphFuntions | Graficador Matemático  
+# 📈 PolyGraphiX | Graficador Matemático  
 <div align="center">
   <img src="preview_resized.png" width="600" alt="GraphFuntions Preview">
 </div>
