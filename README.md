@@ -14,7 +14,7 @@ Herramienta web para graficar funciones polinómicas y calcular derivadas, punto
 - **Responsive**: Funciona en móviles y desktop.  
 
 ## 🔧 Cómo Usarlo  
-1. **Online**: Abre la [demo en GitHub Pages]((https://menesex.github.io/PolyGraphiX/)).  
+1. **Online**: Abre la [demo en GitHub Pages](https://menesex.github.io/PolyGraphiX/).
 2. **Local**:  
    ```bash
    git clone https://github.com/Menesex/GraphFuntions.git
